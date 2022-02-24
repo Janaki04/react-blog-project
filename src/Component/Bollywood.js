@@ -9,7 +9,7 @@ export default function Bollywood() {
     const [name, setName] = useState([])
 
         useEffect(()=>{
-            axios.get("https://react-blogbackend.herokuapp.com/api/v1/information/details/Bollywood",
+            axios.get("https://react-blogbackend.herokuapp.com/api/v1/information/data/Bollywood",
             // {params:{category:"Bollywood"}}
             )
             .then((req,res)=>{
@@ -17,7 +17,7 @@ export default function Bollywood() {
             setName(up)
             })
         },[])
-
+ console.log(name)
 
 
     const [load, setLoad] = useState(true);
@@ -35,9 +35,9 @@ export default function Bollywood() {
             <h1 className='latest'>Latest</h1>
             <div className='boxmain'>
                 {
-                    filterc.filter((value) => load ? value.Id >= 1 : value.Id <= 5).map((items) => {
+                    filterc.filter((value) => load ? value.id >= 1 : value.id <= 5).map((items) => {
                         return (
-                            <div className='boxlatest' onClick={()=>store(`/category/${items.Id}`)}>
+                            <div className='boxlatest' onClick={()=>store(`/category/${items.id}`)}>
                                 <img className='imageslatest' src={items.imageurl} alt='' />
                                 <div className='space'>
                                     <p className='titlelatest'> {items.title}</p>
@@ -61,7 +61,7 @@ export default function Bollywood() {
 
                 {filterc.filter((value) => value.likes >= 100).map((items) => {
                     return (
-                        <div className='spacingbolly' onClick={() => store(`/category/${items.Id}`)}>
+                        <div className='spacingbolly' onClick={() => store(`/category/${items.id}`)}>
                             <img className='imagetoppost' src={items.imageurl} alt='' />
                             <div className='straight'>
                                 <p> {items.title} </p>
@@ -82,4 +82,3 @@ export default function Bollywood() {
         </div>
     )
 }
-

@@ -1,32 +1,31 @@
-import axios from 'axios';
-import {useState,useEffect } from 'react'
+
+import {useContext } from 'react'
 import { useNavigate } from 'react-router-dom';
+import { Createcontext } from './Createcontext';
 
 export default function Displayimg() {
 
-    const [name, setName] = useState([])
+    const [data] = useContext(Createcontext);
 
-    useEffect(()=>{
-        axios.get("https://react-blogbackend.herokuapp.com/api/v1/information/details",
-        // {params:{category:"Bollywood"}}
-        )
-        .then((req,res)=>{
-            const up=req.data
-        setName(up)
-        })
-    },[])
+    // const [name, setName] = useState([])
+
+    // useEffect(()=>{
+    //     axios.get("https://react-blogbackend.herokuapp.com/api/v1/information/details",
+    //     // {params:{category:"Bollywood"}}
+    //     )
+    //     .then((req,res)=>{
+    //         const up=req.data
+    //     setName(up)
+    //     })
+    // },[])
     
     
-
-
-
-
-    let store=useNavigate();
+ let store=useNavigate();
 
     return (
         <div className='disp1' >
-            {name.filter((value) => value.Id <= 1).map(items =>
-                <div key={items} className='disp2' onClick={()=>store(`/travel`)}>  
+            {data.filter((value) => value.id <= 1).map(items =>
+                <div key={items} className='disp2' onClick={()=>store(`/hollywood`)}>  
 
                     <img className='bigimg' src={items.imageurl} alt=''/>
                     <div className='datamove'>
@@ -38,7 +37,7 @@ export default function Displayimg() {
                 </div>
             )
             }
-            {name.filter((value) => value.Id ==='3' || value.Id ==='4' ).map(items =>
+            {data.filter((value) => value.id === 3 || value.id === 4 ).map(items =>
                 <div className='imagemini' onClick={()=>store(`/travel`)}>
                     <img className='miniimg' src={items.imageurl} alt='' />
                     <div className='dataing'>

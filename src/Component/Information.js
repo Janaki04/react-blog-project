@@ -5,28 +5,28 @@ import axios from 'axios'
 
 export default function Information() {
    
-    const [name, setName] = useState([])
-
-    useEffect(()=>{
-        axios.get("https://react-blogbackend.herokuapp.com/api/v1/information/details",
-        // {params:{category:"Bollywood"}}
-        )
-        .then((req,res)=>{
-            const up=req.data
-        setName(up)
-        })
-    },[])
+    const [data, setData] = useState([])
 
     const { id } = useParams();
 
+ useEffect(()=>{
+        axios.get(`https://react-blogbackend.herokuapp.com/api/v1/information/blog/${id}`,
+        
+        )
+        .then((req,res)=>{
+            const up=req.data
+        setData(...up)
+        })
+    },[id])
 
-    return (
+    
+
+ return (
         <div>
-            {name.filter((value) => value.Id === id).map((items) => {
-                return (
+
 
                     <div className='deets'>
-                        <h1 className='titleinfo'>{items.title}</h1>
+                        <h1 className='titleinfo'>{data.title}</h1>
                         <div>
                             
                             <span className='insta'>
@@ -39,15 +39,13 @@ export default function Information() {
                                 <i class="fab fa-twitter-square"></i>
                             </span>
                         </div>
-                        <img className='extra' src={items.extra} alt='' />
-                        <p className='paradeets'>{items.details}</p>
-                        <img className='imagedeets' src={items.detailsimage} alt='' />
+                        <img className='extra' src={data.extra} alt='' />
+                        <p className='paradeets'>{data.details}</p>
+                        <img className='imagedeets' src={data.detailsimage} alt='' />
                        
                     </div>
 
-
-                )
-            })}
+                
 
         </div>
     )

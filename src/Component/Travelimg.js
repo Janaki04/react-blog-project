@@ -1,26 +1,18 @@
-import axios from 'axios';
-import { useState,useEffect} from 'react'
+import { useContext } from 'react';
+import { Createcontext } from './Createcontext';
 import { useNavigate } from 'react-router-dom';
 
 export default function Travelimg() {
     
-    const [name, setName] = useState([])
+    const [data] = useContext(Createcontext);
 
-    useEffect(()=>{
-        axios.get("https://react-blogbackend.herokuapp.com/api/v1/information/details",
-        // {params:{category:"Bollywood"}}
-        )
-        .then((req,res)=>{
-            const up=req.data
-        setName(up)
-        })
-    },[])
+   
     let store=useNavigate()
     return (
         <div className='travelimage'>
-            {name.filter((value) => value.Id ==='7').map(items =>
+            {data.filter((value) => value.id ===7).map(items =>
             
-                <div  key={items.Id}className='disp2'  onClick={() => store(`/category/${items.Id}`)}>  
+                <div  key={items.id}className='disp2'  onClick={() => store(`/category/${items.id}`)}>  
                     <img className='bigimg' src={items.imageurl} alt=''/>
                     <div className='datamove'>
                         <p> {items.title} </p>

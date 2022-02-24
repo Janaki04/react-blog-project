@@ -1,20 +1,12 @@
-import axios from 'axios';
-import {useState,useEffect } from 'react'
+import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Createcontext } from './Createcontext';
+
 
 export default function TheLatest() {
-    
-    const [name, setName] = useState([])
 
-    useEffect(()=>{
-        axios.get("https://react-blogbackend.herokuapp.com/api/v1/information/details",
-        // {params:{category:"Bollywood"}}
-        )
-        .then((req,res)=>{
-            const up=req.data
-        setName(up)
-        })
-    },[])
+    const [data] = useContext(Createcontext);
+
     let store=useNavigate();
 
     return (
@@ -22,8 +14,8 @@ export default function TheLatest() {
         <div>
             <h1 className='thelatest'>WELCOME TO THE HOME PAGE!!!</h1>
             <div className='box'>
-                {name.filter((value) => value.Id <= 3).map(items =>
-                    <div key={items.Id} className='box2' onClick={() => store(`/category/${items.Id}`)}>
+                {data.filter((value) => value.id <= 3).map(items =>
+                    <div key={items.id} className='box2' onClick={() => store(`/category/${items.id}`)}>
                         <img className='image1' src={items.imageurl} alt='' />
                         <p className='title'> {items.title} </p>
                         <p className='description'>{items.description}</p>
